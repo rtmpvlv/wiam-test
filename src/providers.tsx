@@ -1,3 +1,4 @@
+import { ConfigProvider } from "antd";
 import React, { FC, ReactNode } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Store from "./store/rootStore";
@@ -9,8 +10,16 @@ export const Providers: FC = ({ children }: { children: ReactNode }) => {
   store.init();
 
   return (
-    <StoreContext.Provider value={store}>
-      <BrowserRouter>{children}</BrowserRouter>
-    </StoreContext.Provider>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#0D74AC",
+        },
+      }}
+    >
+      <StoreContext.Provider value={store}>
+        <BrowserRouter>{children}</BrowserRouter>
+      </StoreContext.Provider>
+    </ConfigProvider>
   );
 };
